@@ -16,10 +16,11 @@ enum Menu
 };
 
 void menu();
-void testServerConection();
+void testDataBaseConection();
 void insertData();
 void deleteData();
 void updateData();
+void lookData();
 
 int main()
 {
@@ -53,23 +54,24 @@ void menu()
 	switch (menuChoice)
 	{
 		case InsertData:
-			testServerConection();
+			testDataBaseConection();
 			insertData();
 
 			break;
 
 		case DeleteData:
-			testServerConection();
+			testDataBaseConection();
 			deleteData();
 			break;
 
 		case UpdateData:
-			testServerConection();
+			testDataBaseConection();
 			updateData();
 			break;
 
 		case LookData:
-			testServerConection();
+			testDataBaseConection();
+			lookData();
 			break;
 
 		case Quit:
@@ -77,7 +79,7 @@ void menu()
 	}
 }
 
-void testServerConection()
+void testDataBaseConection()
 {
 	testConection = mysql_init(0);
 	testConection = mysql_real_connect(testConection, "localhost", "root", "Mr1052", "MySQL_Project", 3306, NULL, 0);
@@ -255,6 +257,53 @@ void updateData()
 			cout << "-Check if the first field name was written correctly.\n" << endl;
 			cout << "-Check if the second field name was written correctly.\n" << endl;
 			cout << "-Check if the second value was written correctly.\n" << endl;
+
+			system("Pause");
+			system("Cls");
+
+			menu();
+		}
+	}
+}
+
+void lookData()
+{
+	MYSQL_ROW row;
+	MYSQL_RES* result;
+
+	if (testConection)
+	{
+		string tableName;
+
+		cout << "Type the name of the table: ";
+		cin >> tableName;
+		system("Cls");
+
+		string select = "select * from " + tableName;
+
+		const char* copySelect = select.c_str();
+		query_state = mysql_query(testConection, copySelect);
+
+		if (!query_state)
+		{
+			result = mysql_store_result(testConection);
+
+			while (row = mysql_fetch_row(result))
+			{
+				cout << row[0] << "\t" << row[1] << endl;
+			}
+
+			system("Pause");
+			system("Cls");
+
+			menu();
+		}
+
+		else
+		{
+			cout << "Look data failed.\n" << endl;
+			cout << "Possible mistakes:\n" << endl;
+			cout << "-Check if the table name was written correctly. \n" << endl;
 
 			system("Pause");
 			system("Cls");
