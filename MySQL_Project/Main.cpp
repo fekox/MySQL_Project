@@ -114,15 +114,15 @@ void insertData()
 		string fieldName;
 		string newNamePosition;
 
-		cout << "Tipe the name of the table: ";
+		cout << "Type the name of the table: ";
 		cin >> tableName;
 		system("Cls");
 
-		cout << "Tipe the name of the table field: ";
+		cout << "Type the name of the table field: ";
 		cin >> fieldName;
 		system("Cls");
 
-		cout << "Tipe the name of the new position: ";
+		cout << "Type the name of the new position: ";
 		cin >> newNamePosition;
 		system("Cls");
 
@@ -144,6 +144,9 @@ void insertData()
 		else
 		{
 			cout << "Insert failed.\n" << endl;
+			cout << "Possible mistakes:\n" << endl;
+			cout << "-Check if the table name was written correctly. \n" << endl;
+			cout << "-Check if the field name was written correctly.\n" << endl;
 
 			system("Pause");
 			system("Cls");
@@ -160,11 +163,11 @@ void deleteData()
 		string tableName;
 		string fieldName;
 
-		cout << "Tipe the name of the table: ";
+		cout << "Type the name of the table: ";
 		cin >> tableName;
 		system("Cls");
 
-		cout << "Tipe the name of the table field: ";
+		cout << "Type the name of the table field: ";
 		cin >> fieldName;
 		system("Cls");
 
@@ -186,6 +189,9 @@ void deleteData()
 		else
 		{
 			cout << "Delete failed.\n" << endl;
+			cout << "Possible mistakes:\n" << endl;
+			cout << "-Check if the table name was written correctly. \n" << endl;
+			cout << "-Check if the field name was written correctly.\n" << endl;
 
 			system("Pause");
 			system("Cls");
@@ -201,16 +207,32 @@ void updateData()
 	{
 		string tableName;
 		string fieldName;
+		string fieldToUpdate;
 
-		cout << "Tipe the name of the table: ";
+		string valueToUpdate;
+		string valueUpdate;
+
+		cout << "Type the name of the table: ";
 		cin >> tableName;
 		system("Cls");
 
-		cout << "Tipe the name of the table field: ";
+		cout << "Type the name of the table field: ";
 		cin >> fieldName;
 		system("Cls");
 
-		string updatePos = "alter table " + tableName + " drop column " + fieldName;
+		cout << "Type the value you want to add: ";
+		cin >> valueUpdate;
+		system("Cls");
+
+		cout << "Type the name of the field you want to update: ";
+		cin >> fieldToUpdate;
+		system("Cls");
+
+		cout << "Type the value you want to modify: ";
+		cin >> valueToUpdate;
+		system("Cls");
+
+		string updatePos = "update " + tableName + " set " + fieldName + " = " + valueUpdate +" where " + fieldToUpdate + " = " + valueToUpdate;
 
 		const char* copyUpdate = updatePos.c_str();
 		query_state = mysql_query(testConection, copyUpdate);
@@ -228,6 +250,11 @@ void updateData()
 		else
 		{
 			cout << "Update failed.\n" << endl;
+			cout << "Possible mistakes:\n" << endl;
+			cout << "-Check if the table name was written correctly. \n" << endl;
+			cout << "-Check if the first field name was written correctly.\n" << endl;
+			cout << "-Check if the second field name was written correctly.\n" << endl;
+			cout << "-Check if the second value was written correctly.\n" << endl;
 
 			system("Pause");
 			system("Cls");
