@@ -20,7 +20,7 @@ void testDataBaseConection();
 void insertData();
 void deleteData();
 void updateData();
-void lookData();
+void readData();
 
 int main()
 {
@@ -41,7 +41,7 @@ void menu()
 		cout << "1- Insert data\n";
 		cout << "2- Delete data\n";
 		cout << "3- Update data\n";
-		cout << "4- Consult data\n";
+		cout << "4- Read data\n";
 		cout << "5- Quit\n\n";
 
 		cout << "Tipe one option (1-2-3-4-5):";
@@ -71,7 +71,7 @@ void menu()
 
 		case LookData:
 			testDataBaseConection();
-			lookData();
+			readData();
 			break;
 
 		case Quit:
@@ -266,7 +266,7 @@ void updateData()
 	}
 }
 
-void lookData()
+void readData()
 {
 	MYSQL_ROW row;
 	MYSQL_RES* result;
@@ -274,10 +274,26 @@ void lookData()
 	if (testConection)
 	{
 		string tableName;
+		int maxRows;
 
 		cout << "Type the name of the table: ";
 		cin >> tableName;
 		system("Cls");
+
+		do
+		{
+			cout << "Type the maximum number of rows that the table has: ";
+			cin >> maxRows;
+			system("Cls");
+
+			if (maxRows > 5 || maxRows < 1)
+			{
+				cout << "The number entered is not valid.\n" << endl;
+				system("Pause");
+				system("Cls");
+			}
+
+		} while (maxRows > 5 || maxRows < 1);
 
 		string select = "select * from " + tableName;
 
@@ -290,9 +306,32 @@ void lookData()
 
 			while (row = mysql_fetch_row(result))
 			{
-				cout << row[0] << "\t" << row[1] << endl;
+				switch (maxRows)
+				{
+					case 1:
+						cout << row[0] << endl;
+					break;
+
+					case 2:
+						cout << row[0] << "\t" << row[1] << endl;
+					break;
+
+					case 3:
+						cout << row[0] << "\t" << row[1] << "\t" << row[2] << endl;
+					break;
+
+					case 4:
+						cout << row[0] << "\t" << row[1] << "\t" << row[2] << "\t" << row[3] << endl;
+					break;
+
+					case 5:
+						cout << row[0] << "\t" << row[1] << "\t" << row[2] << "\t" << row[3] << "\t" << row[4] << endl;
+					break;
+
+				}
 			}
 
+			cout << "\n";
 			system("Pause");
 			system("Cls");
 
