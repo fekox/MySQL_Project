@@ -164,6 +164,7 @@ void deleteData()
 	{
 		string tableName;
 		string fieldName;
+		string deleteData;
 
 		cout << "Type the name of the table: ";
 		cin >> tableName;
@@ -173,7 +174,11 @@ void deleteData()
 		cin >> fieldName;
 		system("Cls");
 
-		string deletePos = "alter table " + tableName + " drop column " + fieldName;
+		cout << "Type the name of the data you want to delete: ";
+		cin >> deleteData;
+		system("Cls");
+
+		string deletePos = "delete from " + tableName + " where " + fieldName + " like " + "'" + deleteData + "'";
 
 		const char* copyDelete = deletePos.c_str();
 		query_state = mysql_query(testConection, copyDelete);
