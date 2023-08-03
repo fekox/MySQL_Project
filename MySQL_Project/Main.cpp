@@ -44,7 +44,7 @@ void menu()
 		cout << "4- Read data\n";
 		cout << "5- Quit\n\n";
 
-		cout << "Tipe one option (1-2-3-4-5):";
+		cout << "Type one option (1-2-3-4-5):";
 		cin >> menuChoice;
 
 		system("Cls");
