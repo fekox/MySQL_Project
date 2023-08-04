@@ -239,7 +239,7 @@ void updateData()
 		cin >> valueToUpdate;
 		system("Cls");
 
-		string updatePos = "update " + tableName + " set " + fieldName + " = " + valueUpdate +" where " + fieldToUpdate + " = " + valueToUpdate;
+		string updatePos = "update " + tableName + " set " + fieldName + " = '" + valueUpdate +"' where " + fieldToUpdate + " = '" + valueToUpdate + "'";
 
 		const char* copyUpdate = updatePos.c_str();
 		query_state = mysql_query(testConection, copyUpdate);
